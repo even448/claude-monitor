@@ -1,0 +1,14 @@
+.build/
+.build-check/
+.clang-build/
+.clang-*/
+.probe*
+.toolchain/
+build/tests/
+Docs/live/
+*.xcuserstate
+.DS_Store
+build/
+.tools/
+.gh-config/
+.swiftpm/

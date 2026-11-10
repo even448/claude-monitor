@@ -1,0 +1,4 @@
+module CStorageScanner {
+    header "CStorageScanner.h"
+    export *
+}
