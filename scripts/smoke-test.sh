@@ -21,7 +21,15 @@ elif [[ -d "$ROOT/.toolchain/MacOSX.sdk" && -d "$ROOT/.toolchain/usr/lib/swift" 
     -Xcc -fmodules-cache-path="$ROOT/.build/test-clang-cache"
   )
 fi
-swiftc "${SWIFT_ARGS[@]}" \
+compile() {
+  if [[ ${#SWIFT_ARGS[@]} -gt 0 ]]; then
+    swiftc "${SWIFT_ARGS[@]}" "$@"
+  else
+    swiftc "$@"
+  fi
+}
+
+compile \
   -I Sources/CStorageScanner/include \
   .build/CStorageScanner.o \
   Sources/ClaudeMonitor/Support/Formatters.swift \
@@ -32,7 +40,7 @@ swiftc "${SWIFT_ARGS[@]}" \
   -o build/tests/StorageScannerSmoke
 ./build/tests/StorageScannerSmoke
 
-swiftc "${SWIFT_ARGS[@]}" \
+compile \
   Sources/ClaudeMonitor/Support/Formatters.swift \
   Sources/ClaudeMonitor/Support/Models.swift \
   Sources/ClaudeMonitor/Storage/IndexScanner.swift \
